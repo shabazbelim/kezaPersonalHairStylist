@@ -1,0 +1,1387 @@
+<html>
+
+<head>
+    <title>College Recommendation Demo</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
+    <!--  -->
+    <!-- Materialize CSS -->
+    <!--  -->
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+
+    <style>
+        nav {
+            background-color: #efefef;
+        }
+
+        .btn-large {
+            background-color: #2196f3;
+        }
+
+        .btn-large:hover {
+            background-color: #2169f3;
+        }
+
+        #result_container {
+            max-height: 80vh;
+            overflow-y: scroll;
+        }
+
+        #miscelleanous {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #iscLogo {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-left: 1em;
+
+        }
+
+        .collection .collection-item {
+            font-size: 0.75em;
+            padding: 10px 15px;
+        }
+
+        .program-data{
+            font-size: 1.4em;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="www.ischoolconnect.com" class="brand-logo">
+                <img src="connect1.png" id="iscLogo">
+            </a>
+
+        </div>
+    </nav>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col s12" id="form">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <!-- <div class="input-field col s4">
+                            <input id="student_id" type="text" class="validate">
+                            <label for="student_id">Student ID</label>
+                        </div> -->
+                        <div class="input-field col s4">
+                            <input id="gre" placeholder="between 0 to 340" type="number" class="validate" min="0" max="340">
+                            <label for="gre">GRE Score</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="toefl" placeholder="between 0 to 120" type="number" class="validate" min="0" max="120">
+                            <label for="toefl">TOEFL Score</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="gmat" placeholder="between 0 to 800" type="number" class="validate" min="0" max="800">
+                            <label for="gmat">GMAT Score</label>
+                        </div>
+                        <!-- <div class="input-field col s3">
+                            <input id="field" placeholder="" type="number" class="validate">
+                            <label for="field">Field From the Graph</label>
+                        </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input type="number" id="age" placeholder="in Years">
+                            <label for="age">Age</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <select id="nationality">
+                                <option value="India" selected>India</option>
+                                <option value="China">China</option>
+                                <option value="US">US</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label>Nationality</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <select id="state">
+                                <option value="InState" selected>InState</option>
+                                <option value="OutState">OutState</option>
+                                <option value="None">None</option>
+                            </select>
+                            <label>State</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <select id="ethnicity">
+                                <option value="Hispanic">Hispanic</option>
+                                <option value="Asian" selected>Asian</option>
+                                <option value="African">African American</option>
+                                <option value="Caucasian">Caucasian</option>
+                                <option value="NA">NA</option>
+
+                            </select>
+                            <label>Ethnicity</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="input-field col s4">
+                            <select id="degree">
+                                <option value="Bachelors">Bachelors</option>
+                                <option value="Master" selected>Master</option>
+                                <option value="PhD">PhD</option>
+                                <option value="Certificate">Certificate</option>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Other">Other</option>
+
+
+                            </select>
+                            <label>Degree</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input type="number" id="gpa" class="validate" min="0" max="4" step="0.1" placeholder="On the scale of 4">
+                            <label for="gpa">GPA</label>
+                        </div>
+                        <!-- <div class="input-field col s3">
+                            <select id="research_paper">
+                                <option value="None" selected>None</option>
+                                <option value="Local">Local</option>
+                                <option value="National">National</option>
+                                <option value="International">International</option>
+                            </select>
+                            <label>Paper's Published</label>
+                        </div> -->
+                        <div class="input-field col s4">
+                            <input type="number" id="total_exp" placeholder="in Years">
+                            <label for="total_exp">Work Experience</label>
+                        </div>
+
+
+
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s5">
+                            <input type="text" id="undergrad_school" class="autocomplete" placeholder="School Name">
+                            <label for="undergrad_school">Undergrad School Name</label>
+
+                        </div>
+                        <div class="input-field col s7">
+                            <select id="undergrad_dept">
+
+                                <option value="Accountancy and finance" selected>Accountancy and finance</option>
+                                <option value="Agriculture and forestry">Agriculture and forestry</option>
+                                <option value="Anatomy and physiology">Anatomy and physiology</option>
+                                <option value="Anthropology">Anthropology</option>
+                                <option value="Arts and Design">Arts and Design</option>
+                                <option value="Architecture">Architecture</option>
+                                <option value="Biological science">Biological science</option>
+                                <option value="Business & management">Business & management</option>
+                                <option value="Chemical Engineering">Chemical Engineering</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Civil and structural engineering">Civil and structural Engineering</option>
+                                <option value="Classics & Ancient history">Classics & Ancient history</option>
+                                <option value="Communication & media studies">Communication & media studies</option>
+                                <option value="Computer Science & Information">Computer Science & Information</option>
+                                <option value="Dentistry">Dentistry</option>
+                                <option value="Development Studies">Development Studies</option>
+                                <option value="Earth & Marine Sciences">Earth & Marine Sciences</option>
+                                <option value="Economics & Econometrics">Economics & Econometrics</option>
+                                <option value="Education">Education</option>
+                                <option value="Engineering - Electrical & Electronics">Engineering - Electrical & Electronics</option>
+                                <option value="English Language & Literature">English Language & Literature</option>
+                                <option value="Environmental Sciences">Environmental Sciences</option>
+                                <option value="Geography">Geography</option>
+                                <option value="History">History</option>
+                                <option value="Hospitality & Leisure Management">Hospitality & Leisure Management</option>
+                                <option value="Law">Law</option>
+                                <option value="Linguistics">Linguistics</option>
+                                <option value="Library & Information Management">Library & Information Management</option>
+                                <option value="Materials Science">Materials Science</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Mineral & Mining-Engineering">Mineral & Mining-Engineering</option>
+                                <option value="Modern Languages">Modern Languages</option>
+                                <option value="Medicine">Medicine</option>
+                                <option value="Mechanical, Aeronautical & Manufacturing">Mechanical, Aeronautical & Manufacturing</option>
+                                <option value="Nursing">Nursing</option>
+                                <option value="Psychology">Psychology</option>
+                                <option value="Philosophy">Philosophy</option>
+                                <option value="Physics & Astronomy">Physics & Astronomy</option>
+                                <option value="Pharmacy & Pharmacology">Pharmacy & Pharmacology</option>
+                                <option value="Politics & International Studies">Politics & International Studies</option>
+                                <option value="Performing Arts">Performing Arts</option>
+                                <option value="Social policy and Administration">Social policy and Administration</option>
+                                <option value="Sports-related subjects">Sports-related subjects</option>
+                                <option value="Statistics & Operational Research">Statistics & Operational Research</option>
+                                <option value="Sociology">Sociology</option>
+                                <option value="Theology,Divinity and Religious">Theology,Divinity and Religious</option>
+                                <option value="Veterinary science">Veterinary science</option>
+                            </select>
+                            <label>Undergrad Department</label>
+                        </div>
+                        <div class="input-field col s8">
+                            <select id="target_dept">
+
+                                <option value="Accountancy and finance" selected>Accountancy and finance</option>
+                                <option value="Agriculture and forestry">Agriculture and forestry</option>
+                                <option value="Anatomy and physiology">Anatomy and physiology</option>
+                                <option value="Anthropology">Anthropology</option>
+                                <option value="Arts and Design">Arts and Design</option>
+                                <option value="Architecture">Architecture</option>
+                                <option value="Biological science">Biological science</option>
+                                <option value="Business & management">Business & management</option>
+                                <option value="Chemical Engineering">Chemical Engineering</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Civil and structural engineering">Civil and structural engineering</option>
+                                <option value="Classics & Ancient history">Classics & Ancient history</option>
+                                <option value="Communication & media studies">Communication & media studies</option>
+                                <option value="Computer Science & Information">Computer Science & Information</option>
+                                <option value="Dentistry">Dentistry</option>
+                                <option value="Development Studies">Development Studies</option>
+                                <option value="Earth & Marine Sciences">Earth & Marine Sciences</option>
+                                <option value="Economics & Econometrics">Economics & Econometrics</option>
+                                <option value="Education">Education</option>
+                                <option value="Engineering - Electrical & Electronics">Engineering - Electrical & Electronics</option>
+                                <option value="English Language & Literature">English Language & Literature</option>
+                                <option value="Environmental Sciences">Environmental Sciences</option>
+                                <option value="Geography">Geography</option>
+                                <option value="History">History</option>
+                                <option value="Hospitality & Leisure Management">Hospitality & Leisure Management</option>
+                                <option value="Law">Law</option>
+                                <option value="Linguistics">Linguistics</option>
+                                <option value="Library & Information Management">Library & Information Management</option>
+                                <option value="Materials Science">Materials Science</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Mineral & Mining-Engineering">Mineral & Mining-Engineering</option>
+                                <option value="Modern Languages">Modern Languages</option>
+                                <option value="Medicine">Medicine</option>
+                                <option value="Mechanical, Aeronautical & Manufacturing">Mechanical, Aeronautical & Manufacturing</option>
+                                <option value="Nursing">Nursing</option>
+                                <option value="Psychology">Psychology</option>
+                                <option value="Philosophy">Philosophy</option>
+                                <option value="Physics & Astronomy">Physics & Astronomy</option>
+                                <option value="Pharmacy & Pharmacology">Pharmacy & Pharmacology</option>
+                                <option value="Politics & International Studies">Politics & International Studies</option>
+                                <option value="Performing Arts">Performing Arts</option>
+                                <option value="Social policy and Administration">Social policy and Administration</option>
+                                <option value="Sports-related subjects">Sports-related subjects</option>
+                                <option value="Statistics & Operational Research">Statistics & Operational Research</option>
+                                <option value="Sociology">Sociology</option>
+                                <option value="Theology,Divinity and Religious">Theology,Divinity and Religious</option>
+                                <option value="Veterinary science">Veterinary science</option>
+                            </select>
+                            <label>Target Department in US</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="budget" placeholder="Your Budget" type="number" class="validate">
+                            <label for="budget">Budget</label>
+                        </div>
+                    </div>
+                    <div class="center-align">
+                        <a class="waves-effect waves-light btn-large" id="recommendButton">Recommend!</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="col s7 hide" id="results">
+            <div class="container" id="result_container">
+                <div id="miscelleanous">
+                    <div class="preloader-wrapper big active" id="resultPreloader">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hide" id="resultFailed">
+                        <h2>No Recommendations!</h2>
+                        <h4>Please Check your inputs</h4>
+                    </div>
+                </div>
+
+                <!-- Dream -->
+                <div class="row hide" id="dream_school_card">
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">Dream Schools</span>
+                                <ul id="dream_schools" class="collection">
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Reach -->
+                <div class="row hide" id="reach_school_card">
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">Reach Schools</span>
+                                <ul id="reach_schools" class="collection">
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Safe -->
+                <div class="row hide" id="safe_school_card">
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">Safe Schools</span>
+                                <ul id="safe_schools" class="collection">
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <!-- AJAX Call -->
+    <script>
+        $(document).ready(function () {
+
+            var apiResponse = {};
+            // autocomplete for undergrad school names
+            $('input.autocomplete').autocomplete({
+                data: {
+                    "Aligarh Muslim University,Aligarh": null,
+                    "All India Institute of Medical Sciences Delhi,New Delhi": null,
+                    "Amity University,Noida": null,
+                    "Amrita Vishwa Vidyapeetham,Coimbatore": null,
+                    "Andhra University,Visakhapatnam": null,
+                    "Anna University,Chennai": null,
+                    "Banaras Hindu University,Varanasi": null,
+                    "Bangalore University,Bangalore": null,
+                    "Bharathidasan University,Tiruchirappalli": null,
+                    "Birla Institute of Technology and Science,Pilani": null,
+                    "Cochin University of Science and Technology,Kochi": null,
+                    "Dr. Hari Singh Gour University,Sagar": null,
+                    "Goa University,Taleigao": null,
+                    "Govind Ballabh Pant University of Agriculture and Technology,Pantnagar": null,
+                    "Indian Institute of Information Technology Allahabad,Allahabad": null,
+                    "Indian Institute of Science,Bangalore": null,
+                    "Indian Institute of Technology Bombay,Mumbai": null,
+                    "Indian Institute of Technology Delhi,New Delhi": null,
+                    "Indian Institute of Technology Guwahati,Guwahati": null,
+                    "Indian Institute of Technology Hyderabad,Eddumailaram": null,
+                    "Indian Institute of Technology Kanpur,Kanpur": null,
+                    "Indian Institute of Technology Kharagpur,Kharagpur": null,
+                    "Indian Institute of Technology Madras,Chennai": null,
+                    "Indian Institute of Technology Patna,Patna": null,
+                    "Indian Institute of Technology Roorkee,Roorkee": null,
+                    "Indian Institute of Technology, BHU,Varanasi": null,
+                    "Indraprastha Institute of Information Technology,New Delhi": null,
+                    "Institute of Chemical Technology,Mumbai": null,
+                    "Jadavpur University,Kolkata": null,
+                    "Jamia Millia Islamia,New Delhi": null,
+                    "Jawaharlal Nehru Technological University, Anantapur,Anantapur": null,
+                    "KIIT University,Bhubaneswar": null,
+                    "Kumaun University,Nainital": null,
+                    "Kurukshetra University,Kurukshetra": null,
+                    "Kuvempu University,Shimoga": null,
+                    "Malaviya National Institute of Technology, Jaipur,Jaipur": null,
+                    "Mangalore University,Mangalore": null,
+                    "Manipal University,Manipal": null,
+                    "Motilal Nehru National Institute of Technology,Allahabad": null,
+                    "National Institute of Technology, Calicut,Calicut": null,
+                    "National Institute of Technology, Rourkela,Rourkela": null,
+                    "National Institute of Technology, Tiruchirappalli,Tiruchirappalli": null,
+                    "North Maharashtra University,Jalgaon": null,
+                    "O.P. Jindal Global University,Sonipat": null,
+                    "Osmania University,Hyderabad": null,
+                    "Panjab University,Chandigarh": null,
+                    "Pondicherry University,Puducherry": null,
+                    "Savitribai Phule Pune University,Pune": null,
+                    "Sri Krishnadevaraya University,Anantapur": null,
+                    "Sri Venkateswara University,Tirupati": null,
+                    "SRM Institute of Science and Technology,Chennai": null,
+                    "Symbiosis International University,Pune": null,
+                    "Tamil Nadu Agricultural University,Coimbatore": null,
+                    "Tezpur University,Tezpur": null,
+                    "Thapar Institute of Engineering and Technology,Patiala": null,
+                    "University of Agricultural Sciences, Bangalore,Bangalore": null,
+                    "University of Calcutta,Kolkata": null,
+                    "University of Calicut,Tenhipalam": null,
+                    "University of Delhi,New Delhi": null,
+                    "University of Kashmir,Srinagar": null,
+                    "University of Madras,Chennai": null,
+                    "University of Mumbai,Mumbai": null,
+                    "University of Mysore,Mysore": null,
+                    "Visva-Bharati University,Santiniketan": null,
+                    "VIT University,Vellore": null,
+                    "Indian Institute of Information Technology, Guwahati,Guwahati": null,
+                    "Indian Institute of Information Technology, Lucknow,Allahabad": null,
+                    "Indian School of Mines,Dhanbad": null,
+                    "National Institute of Technology, Warangal,Warangal": null,
+                    "University of Kalyani,Kalyani": null,
+                    "All India Institute of Medical Sciences Bhopal,Bhopal": null,
+                    "All India Institute of Medical Sciences Bhubaneswar,Bhubaneswar": null,
+                    "All India Institute of Medical Sciences Jodhpur,Jodhpur": null,
+                    "All India Institute of Medical Sciences Patna,Patna": null,
+                    "All India Institute of Medical Sciences Raipur,Raipur": null,
+                    "All India Institute of Medical Sciences Rishikesh,Rishikesh": null,
+                    "Annamalai University,Chidambaram": null,
+                    "Christ University,Bangalore": null,
+                    "Dakshina Bharat Hindi Prachar Sabha,Chennai": null,
+                    "Dr. B R Ambedkar National Institute of Technology Jalandhar,Jalandhar": null,
+                    "Indian Institute of Engineering Science and Technology, Shibpur,Howrah": null,
+                    "Indian Institute of Information Technology and Management Gwalior,Gwalior": null,
+                    "Indian Institute of Information Technology, Design and Manufacturing,Chennai": null,
+                    "Indian Institute of Information Technology, Kalyani,Kalyani": null,
+                    "Indian Institute of Information Technology, Kottayam,Kottayam": null,
+                    "Indian Institute of Information Technology, Manipur,Imphal": null,
+                    "Indian Institute of Information Technology, Sri City,Sri City": null,
+                    "Indian Institute of Information Technology, Una,Una": null,
+                    "Indian Institute of Information Technology, Vadodara,Gandhinagar": null,
+                    "Indian Institute of Science Education and Research, Bhopal,Bhopal": null,
+                    "Indian Institute of Science Education and Research, Kolkata,Mohanpur": null,
+                    "Indian Institute of Science Education and Research, Mohali,Mohali": null,
+                    "Indian Institute of Science Education and Research, Pune,Pune": null,
+                    "Indian Institute of Science Education and Research, Thiruvananthapuram,Thiruvananthapuram": null,
+                    "Indian Institute of Technology Bhubaneswar,Bhubaneswar": null,
+                    "Indian Institute of Technology Gandhinagar,Chandkheda": null,
+                    "Indian Institute of Technology Indore,Indore": null,
+                    "Indian Institute of Technology Jodhpur,Jodhpur": null,
+                    "Indian Institute of Technology Mandi,Mandi": null,
+                    "Indian Institute of Technology Ropar,Rupnagar": null,
+                    "Indian Maritime University,Chennai": null,
+                    "Indian Statistical Institute,Kolkata": null,
+                    "King George's Medical University,Lucknow": null,
+                    "Lovely Professional University,Phagwara": null,
+                    "Maulana Azad National Institute of Technology,Bhopal": null,
+                    "Nalanda University,Rajgir": null,
+                    "National Institute of Design,Ahmedabad": null,
+                    "National Institute of Fashion Technology,New Delhi": null,
+                    "National Institute of Pharmaceutical Education and Research, Hyderabad,Hyderabad": null,
+                    "National Institute of Technology, Agartala,Agartala": null,
+                    "National Institute of Technology, Arunachal Pradesh,Yupia": null,
+                    "National Institute of Technology, Delhi,New Delhi": null,
+                    "National Institute of Technology, Durgapur,Durgapur": null,
+                    "National Institute of Technology, Goa,Farmagudi": null,
+                    "National Institute of Technology, Hamirpur,Hamirpur": null,
+                    "National Institute of Technology, Jamshedpur,Jamshedpur": null,
+                    "National Institute of Technology, Karnataka,Mangalore": null,
+                    "National Institute of Technology, Kurukshetra,Kurukshetra": null,
+                    "National Institute of Technology, Manipur,Imphal": null,
+                    "National Institute of Technology, Meghalaya,Shillong": null,
+                    "National Institute of Technology, Mizoram,Aizawl": null,
+                    "National Institute of Technology, Nagaland,Dimapur": null,
+                    "National Institute of Technology, Patna,Patna": null,
+                    "National Institute of Technology, Puducherry,Karaikal": null,
+                    "National Institute of Technology, Raipur,Raipur": null,
+                    "National Institute of Technology, Sikkim,Ravangla": null,
+                    "National Institute of Technology, Silchar,Silchar": null,
+                    "National Institute of Technology, Srinagar,Srinagar": null,
+                    "National Institute of Technology, Uttarakhand,Srinagar": null,
+                    "National Law School of India University,Bangalore": null,
+                    "National Law University, Jodhpur,Jodhpur": null,
+                    "National Law University,New Delhi": null,
+                    "Post Graduate Institute of Medical Education and Research,Chandigarh": null,
+                    "Rajiv Gandhi Institute of Petroleum Technology,Raebareli": null,
+                    "Rajiv Gandhi National Institute of Youth Development,Sriperumbudur": null,
+                    "Rani Durgavati Vishwavidyalaya,Jabalpur": null,
+                    "Sardar Vallabhbhai National Institute of Technology, Surat,Surat": null,
+                    "SASTRA University,Thanjavur": null,
+                    "Sathyabama University,Chennai": null,
+                    "School of Planning and Architecture, Bhopal,Bhopal": null,
+                    "School of Planning and Architecture, Delhi,New Delhi": null,
+                    "School of Planning and Architecture, Vijayawada,Vijayawada": null,
+                    "Sree Chitra Thirunal Institute of Medical Sciences and Technology,Thiruvananthapuram": null,
+                    "St. Xavier's University,Kolkata": null,
+                    "University of Allahabad,Allahabad": null,
+                    "Abhilashi University,Chailchowk": null,
+                    "Acharya N.G. Ranga Agricultural University,Hyderabad": null,
+                    "Acharya Nagarjuna University,Guntur": null,
+                    "Adamas University,Barasat": null,
+                    "Adesh University,Bathinda": null,
+                    "Adikavi Nannaya University,Rajahmundry": null,
+                    "Ahmedabad University,Ahmedabad": null,
+                    "AISECT University,Mendua Village": null,
+                    "Ajeenkya D.Y. Patil University,Lohegaon": null,
+                    "Akal University,Bathinda": null,
+                    "AKS University,Satna": null,
+                    "Alagappa University,Karaikudi": null,
+                    "Al-Falah University,Faridabad": null,
+                    "Aliah University,Kolkata": null,
+                    "Allahabad State University,Allahabad": null,
+                    "Alliance University,Bangalore": null,
+                    "Ambedkar University Delhi,New Delhi": null,
+                    "Anand Agricultural University,Anand": null,
+                    "Anant National University,Ahmedabad": null,
+                    "Ansal University,Gurgaon": null,
+                    "AP Goyal Shimla University,Shimla": null,
+                    "Apeejay Stya University,Gurgaon": null,
+                    "Apex Professional University,Pasighat": null,
+                    "APJ Abdul Kalam Technological University,Thiruvananthapuram": null,
+                    "Arka Jain University,Gamharia": null,
+                    "Arni University,Kathgarh": null,
+                    "Arunachal University of Studies,Namsai": null,
+                    "Arunodaya University,Itanagar": null,
+                    "Aryabhatta Knowledge University,Patna": null,
+                    "Ashoka University,Sonipat": null,
+                    "Assam Agricultural University,Jorhat": null,
+                    "Assam Don Bosco University,Guwahati": null,
+                    "Assam Down Town University,Guwahati": null,
+                    "Assam Rajiv Gandhi University of Cooperative Management,Sivasagar": null,
+                    "Assam Science and Technology University,Guwahati": null,
+                    "Assam University,Silchar": null,
+                    "Assam Women's University,Jorhat": null,
+                    "Atal Bihari Vajpayee Hindi Vishwavidyalaya,Bhopal": null,
+                    "AURO University,Surat": null,
+                    "Avantika University,Ujjain": null,
+                    "Avinashilingam University,Coimbatore": null,
+                    "Awadhesh Pratap Singh University,Rewa": null,
+                    "Ayush and Health Sciences University of Chhattisgarh,Raipur": null,
+                    "Azim Premji University,Bangalore": null,
+                    "B.S. Abdur Rahman University,Chennai": null,
+                    "Baba Farid University of Health Sciences,Faridkot": null,
+                    "Baba Ghulam Shah Badhshah University,Rajouri": null,
+                    "Baba Mastnath University,Rohtak": null,
+                    "Babasaheb Bhimrao Ambedkar Bihar University,Muzaffarpur": null,
+                    "Babasaheb Bhimrao Ambedkar University,Lucknow": null,
+                    "Babu Banarasi Das University,Lucknow": null,
+                    "Baddi University of Emerging Sciences and Technologies,Baddi": null,
+                    "BAHRA University,Waknaghat": null,
+                    "Banasthali Vidyapith,Banasthali": null,
+                    "Banda University of Agriculture and Technology,Banda": null,
+                    "Bankura University,Bankura": null,
+                    "Bareilly International University,Bareilly": null,
+                    "Barkatullah University,Bhopal": null,
+                    "Bastar Vishwavidyalaya,Bastar": null,
+                    "Bengaluru North University,Kolar": null,
+                    "Bennett University,Greater Noida": null,
+                    "Berhampur University,Berhampur": null,
+                    "Bhagat Phool Singh Mahila Vishwavidyalaya,Khanpur Kalan": null,
+                    "Bhagwant University,Ajmer": null,
+                    "Bhakta Kavi Narsinh Mehta University,Junagadh": null,
+                    "Bharath Institute of Higher Education and Research,Chennai": null,
+                    "Bharathiar University,Coimbatore": null,
+                    "Bharati Vidyapeeth University,Pune": null,
+                    "Bhartiya Skill Development University,Jaipur": null,
+                    "Bhatkhande Music Institute,Lucknow": null,
+                    "Bhupal Nobles University,Udaipur": null,
+                    "Bhupendra Narayan Mandal University,Madhepura": null,
+                    "Bidhan Chandra Krishi Vishwavidyalaya,Mohanpur": null,
+                    "Bihar Agricultural University,Bhagalpur": null,
+                    "Biju Patnaik University of Technology,Rourkela": null,
+                    "Bilaspur Vishwavidyalaya,Bilaspur": null,
+                    "Birla Institute of Technology,Ranchi": null,
+                    "Birsa Agricultural University,Ranchi": null,
+                    "BLDE University,Bijapur": null,
+                    "BML Munjal University,Gurgaon": null,
+                    "Bodoland University,Kokrajhar": null,
+                    "Brainware University,Barasat": null,
+                    "Bundelkhand University,Jhansi": null,
+                    "C.U. Shah University,Wadhwan": null,
+                    "Calorx Teachers University,Ahmedabad": null,
+                    "Career Point University,Hamirpur": null,
+                    "Central Agricultural University,Imphal": null,
+                    "Central Institute of Fisheries Education,Mumbai": null,
+                    "Central University of Gujarat,Gandhinagar": null,
+                    "Central University of Haryana,Mahendragarh": null,
+                    "Central University of Himachal Pradesh,Kangra": null,
+                    "Central University of Jammu,Jammu": null,
+                    "Central University of Jharkhand,Ranchi": null,
+                    "Central University of Karnataka,Gulbarga": null,
+                    "Central University of Kashmir,Srinagar": null,
+                    "Central University of Kerala,Kasaragod": null,
+                    "Central University of Orissa,Koraput": null,
+                    "Central University of Punjab,Bathinda": null,
+                    "Central University of Rajasthan,Ajmer": null,
+                    "Central University of South Bihar,Patna": null,
+                    "Central University of Tamil Nadu,Thiruvarur": null,
+                    "Central University of Tibetan Studies,Varanasi": null,
+                    "Centurion University of Technology and Management,Bhubaneswar": null,
+                    "CEPT University,Ahmedabad": null,
+                    "Chanakya National Law University,Patna": null,
+                    "Chandigarh University,Mohali": null,
+                    "Chandra Shekhar Azad University of Agriculture and Technology,Kanpur": null,
+                    "Charotar University of Science and Technology,Anand": null,
+                    "Chaudhary Bansi Lal University,Bhiwani": null,
+                    "Chaudhary Charan Singh Haryana Agricultural University,Hisar": null,
+                    "Chaudhary Charan Singh University,Meerut": null,
+                    "Chaudhary Devi Lal University,Sirsa": null,
+                    "Chaudhary Ranbir Singh University,Jind": null,
+                    "Chennai Mathematical Institute,Chennai": null,
+                    "Chhatrapati Shahu Ji Maharaj University,Kalyanpur": null,
+                    "Chhattisgarh Kamdhenu Vishwavidyalaya,Raipur": null,
+                    "Chhattisgarh Swami Vivekananda Technical University,Bhilai": null,
+                    "Children's University,Gandhinagar": null,
+                    "Chitkara University,Kalujhanda": null,
+                    "Chitkara University,Punjab": null,
+                    "Cluster University of Jammu,Jammu": null,
+                    "CMJ University,Jorabat": null,
+                    "CMR University,Bangalore": null,
+                    "Cooch Behar Panchanan Barma University,Cooch Behar": null,
+                    "Cotton University,Guwahati": null,
+                    "CSK Himachal Pradesh Krishi Vishvavidyalaya,Palampur": null,
+                    "Damodaram Sanjivayya National Law University,Visakhapatnam": null,
+                    "Datta Meghe Institute of Medical Sciences,Nagpur": null,
+                    "DAV University,Jalandhar": null,
+                    "Davangere University,Davangere": null,
+                    "Dayalbagh Educational Institute,Agra": null,
+                    "Dayananda Sagar University,Bangalore": null,
+                    "Deccan College Post-Graduate and Research Institute,Pune": null,
+                    "Deen Dayal Upadhyay Gorakhpur University,Gorakhpur": null,
+                    "Deenbandhu Chhotu Ram University of Science and Technology,Murthal": null,
+                    "Delhi Pharmaceutical Sciences and Research University,New Delhi": null,
+                    "Delhi Technological University,New Delhi": null,
+                    "Desh Bhagat University,Mandi Gobindgarh": null,
+                    "Dev Sanskriti Vishwavidyalaya,Shantikunj": null,
+                    "Devi Ahilya Vishwavidyalaya,Indore": null,
+                    "Dharmsinh Desai University,Nadiad": null,
+                    "Dhirubhai Ambani Institute of Information and Communication Technology,Gandhinagar": null,
+                    "Diamond Harbour Women's University,Sarisha": null,
+                    "Dibrugarh University,Dibrugarh": null,
+                    "DIT University,Dehradun": null,
+                    "Doon University,Dehradun": null,
+                    "Dr K.N. Modi University,Newai": null,
+                    "Dr. A.P.J Abdul Kalam University,Indore": null,
+                    "Dr. A.P.J. Abdul Kalam Technical University,Lucknow": null,
+                    "Dr. B.R. Ambedkar University of Social Sciences,Indore": null,
+                    "Dr. B.R. Ambedkar University,Etcherla": null,
+                    "Dr. Babasaheb Ambedkar Marathwada University,Aurangabad": null,
+                    "Dr. Babasaheb Ambedkar Technological University,Lonere": null,
+                    "Dr. Balasaheb Sawant Konkan Krishi Vidyapeeth,Dapoli": null,
+                    "Dr. Bhimrao Ambedkar University,Agra": null,
+                    "Dr. C.V. Raman University,Bilaspur": null,
+                    "Dr. D.Y. Patil Vidyapeeth,Pune": null,
+                    "Dr. M.G.R. Educational and Research Institute,Chennai": null,
+                    "Dr. N.T.R. University of Health Sciences,Vijayawada": null,
+                    "Dr. Panjabrao Deshmukh Krishi Vidyapeeth,Akola": null,
+                    "Dr. Rajendra Prasad Central Agriculture University,Samastipur": null,
+                    "Dr. Ram Manohar Lohia Avadh University,Faizabad": null,
+                    "Dr. Ram Manohar Lohiya National Law University,Lucknow": null,
+                    "Dr. Sarvepalli Radhakrishnan Rajasthan Ayurved University,Jodhpur": null,
+                    "Dr. Shakuntala Misra Rehabilitation University,Lucknow": null,
+                    "Dr. Vishwanath Karad MIT World Peace University,Pune": null,
+                    "Dr. Y.S. Parmar University of Horticulture and Forestry,Nauni": null,
+                    "Dr.Y.S.R. Horticultural University,Tadepalligudem": null,
+                    "Dravidian University,Kuppam": null,
+                    "EIILM University,Jorethang": null,
+                    "Era University,Lucknow": null,
+                    "Eternal University,Baru Sahib": null,
+                    "Fakir Mohan University,Balasore": null,
+                    "Flame University,Pune": null,
+                    "Forest Research Institute,Dehradun": null,
+                    "G H Raisoni University,Saikheda": null,
+                    "G.L.S. University,Ahmedabad": null,
+                    "Galgotias University,Noida": null,
+                    "Gandhi Institute of Technology and Management,Visakhapatnam": null,
+                    "Gandhigram Rural University,Gandhigram": null,
+                    "Gangadhar Meher University,Sambalpur": null,
+                    "Ganpat University,Mehsana": null,
+                    "Garden City University,Bangalore": null,
+                    "Gauhati University,Guwahati": null,
+                    "Gautam Buddha University,Greater Noida": null,
+                    "GD Goenka University,Gurgaon": null,
+                    "Geetanjali University,Udaipur": null,
+                    "GLA University,Chaumuhan": null,
+                    "Glocal University,Saharanpur": null,
+                    "GNA University,Phagwara": null,
+                    "Gokhale Institute of Politics and Economics,Pune": null,
+                    "Gondwana University,Gadchiroli": null,
+                    "Govind Guru Tribal University,Banswara": null,
+                    "Graphic Era Hill University,Clement Town": null,
+                    "Graphic Era University,Dehradun": null,
+                    "GSFC University,Vadodara": null,
+                    "Gujarat Ayurved University,Jamnagar": null,
+                    "Gujarat Forensic Sciences University,Gandhinagar": null,
+                    "Gujarat National Law University,Gandhinagar": null,
+                    "Gujarat Technological University,Ahmedabad": null,
+                    "Gujarat University of Transplantation Sciences,Ahmedabad": null,
+                    "Gujarat University,Ahmedabad": null,
+                    "Gujarat Vidyapith,Ahmedabad": null,
+                    "Gulbarga University,Gulbarga": null,
+                    "Guru Angad Dev Veterinary and Animal Sciences University,Ludhiana": null,
+                    "Guru Ghasidas Vishwavidyalaya,Bilaspur": null,
+                    "Guru Gobind Singh Indraprastha University,New Delhi": null,
+                    "Guru Jambheshwar University of Science and Technology,Hisar": null,
+                    "Guru Kashi University,Talwandi Sabo": null,
+                    "Guru Nanak Dev University,Amritsar": null,
+                    "Guru Ravidas Ayurved University,Hoshiarpur": null,
+                    "Gurukul Kangri Vishwavidyalaya,Haridwar": null,
+                    "Harcourt Butler Technical University,Kanpur": null,
+                    "Haridev Joshi University of Journalism and Mass Communication,Jaipur": null,
+                    "Haryana Vishwakarma Skill University,Faridabad": null,
+                    "Hemchandracharya North Gujarat University,Patan": null,
+                    "Hemwati Nandan Bahuguna Garhwal University,Srinagar": null,
+                    "Hemwati Nandan Bahuguna Medical University,Dehradun": null,
+                    "Hidayatullah National Law University,Raipur": null,
+                    "Himachal Pradesh Technical University,Hamirpur": null,
+                    "Himachal Pradesh University,Shimla": null,
+                    "Himalayan Garhwal University,Pokhara Village": null,
+                    "Himalayan University,Itanagar": null,
+                    "Himgiri ZEE University,Dehradun": null,
+                    "Hindustan Institute of Technology and Science,Chennai": null,
+                    "Homi Bhabha National Institute,Mumbai": null,
+                    "ICFAI University, Dehradun,Dehradun": null,
+                    "ICFAI University, Himachal Pradesh,Baddi": null,
+                    "ICFAI University, Jaipur,Jaipur": null,
+                    "ICFAI University, Jharkhand,Ranchi": null,
+                    "ICFAI University, Meghalaya,Tura": null,
+                    "ICFAI University, Mizoram,Aizawl": null,
+                    "ICFAI University, Nagaland,Dimapur": null,
+                    "ICFAI University, Raipur,Durg": null,
+                    "ICFAI University, Sikkim,Gangtok": null,
+                    "ICFAI University, Tripura,Agartala": null,
+                    "IEC University,Kalujhanda": null,
+                    "IFHE Hyderabad,Hyderabad": null,
+                    "IFTM University,Moradabad": null,
+                    "IIHMR University,Jaipur": null,
+                    "IIMT University,Meerut": null,
+                    "IMS Unison University,Dehradun": null,
+                    "Indian Agricultural Research Institute,New Delhi": null,
+                    "Indian Institute of Foreign Trade,New Delhi": null,
+                    "Indian Institute of Public Health,Gandhinagar": null,
+                    "Indian Institute of Space Science and Technology,Thiruvananthapuram": null,
+                    "Indian Institute of Teacher Education,Gandhinagar": null,
+                    "Indian Veterinary Research Institute,Bareilly": null,
+                    "Indira Gandhi Delhi Technical University for Women,New Delhi": null,
+                    "Indira Gandhi Institute of Development Research,Mumbai": null,
+                    "Indira Gandhi Institute of Medical Sciences, Sheikhpura,Patna": null,
+                    "Indira Gandhi Krishi Vishwavidyalaya,Raipur": null,
+                    "Indira Gandhi National Tribal University,Amarkantak": null,
+                    "Indira Gandhi Technological and Medical Sciences University,Ziro": null,
+                    "Indira Gandhi University, Meerpur,Rewari": null,
+                    "Indira Kala Sangeet Vishwavidyalaya,Khairagarh": null,
+                    "Indrashil University,Dholera": null,
+                    "Indus International University,Bathu": null,
+                    "Indus University,Ahmedabad": null,
+                    "Institute of Advanced Research,Gandhinagar": null,
+                    "Institute of Advanced Studies in Education,Sardarshahr": null,
+                    "Institute of Infrastructure, Technology, Research and Management,Ahmedabad": null,
+                    "Integral University,Lucknow": null,
+                    "International Institute for Population Sciences,Mumbai": null,
+                    "International Institute of Information Technology Bangalore,Bangalore": null,
+                    "International Institute of Information Technology, Bhubaneswar,Bhubaneswar": null,
+                    "International Institute of Information Technology, Hyderabad,Hyderabad": null,
+                    "International Institute of Information Technology, Naya Raipur,Naya Raipur": null,
+                    "Invertis University,Bareilly": null,
+                    "ISBM University,Gariyaband": null,
+                    "Islamic University of Science and Technology,Pulwama": null,
+                    "ITM University Gwalior,Gwalior": null,
+                    "ITM University Raipur,Raipur": null,
+                    "ITM Vocational University,Waghodia": null,
+                    "Jagadguru Ramanandacharya Rajasthan Sanskrit University,Jaipur": null,
+                    "Jagadguru Rambhadracharya Handicapped University,Chitrakoot": null,
+                    "Jagadguru Sri Shivarathreeswara University,Mysore": null,
+                    "Jagan Nath University,Jhajjar": null,
+                    "Jagannath University,Jaipur": null,
+                    "Jagran Lakecity University,Bhopal": null,
+                    "Jai Narain Vyas University,Jodhpur": null,
+                    "Jai Prakash Vishwavidyalaya,Chapra": null,
+                    "Jain University,Bangalore": null,
+                    "Jain Vishva Bharati Institute,Ladnun": null,
+                    "Jaipur National University,Jaipur": null,
+                    "Jamia Hamdard,New Delhi": null,
+                    "Jananayak Chandrashekhar University,Ballia": null,
+                    "Janardan Rai Nagar Rajasthan Vidhyapeeth University,Udaipur": null,
+                    "Jawaharlal Institute of Postgraduate Medical Education and Research,Puducherry": null,
+                    "Jawaharlal Nehru Architecture and Fine Arts University,Hyderabad": null,
+                    "Jawaharlal Nehru Centre for Advanced Scientific Research,Bangalore": null,
+                    "Jawaharlal Nehru Krishi Vishwavidyalaya,Jabalpur": null,
+                    "Jawaharlal Nehru Technological University, Kakinada,Kakinada": null,
+                    "Jawaharlal Nehru Technological University,Hyderabad": null,
+                    "Jawaharlal Nehru University,New Delhi": null,
+                    "Jayoti Vidyapeeth Women's University,Jaipur": null,
+                    "Jaypee Institute of Information Technology,Noida": null,
+                    "Jaypee University Anoopshahr,Anupshahr": null,
+                    "Jaypee University of Engineering and Technology,Raghogarh": null,
+                    "Jaypee University of Information Technology,Waknaghat": null,
+                    "JECRC University,Jaipur": null,
+                    "Jharkhand Rai University,Ranchi": null,
+                    "Jharkhand Raksha Shakti University,Ranchi": null,
+                    "JIS University,Agarpara": null,
+                    "Jiwaji University,Gwalior": null,
+                    "JK Lakshmipat University,Jaipur": null,
+                    "Jodhpur National University,Jodhpur": null,
+                    "JS University,Shikohabad": null,
+                    "JSS Science and Technology University,Mysore": null,
+                    "Junagadh Agricultural University,Junagadh": null,
+                    "K L University,Vaddeswaram": null,
+                    "K.K. University,Biharsharif": null,
+                    "K.R. Mangalam University,Gurgaon": null,
+                    "Kadi Sarva Vishwavidyalaya,Gandhinagar": null,
+                    "Kakatiya University,Warangal": null,
+                    "Kalasalingam University,Krishnankoil": null,
+                    "Kalinga University,Raipur": null,
+                    "Kamdhenu University,Gandhinagar": null,
+                    "Kameshwar Singh Darbhanga Sanskrit University,Darbhanga": null,
+                    "Kannada University,Vidyaranya": null,
+                    "Kannur University,Kannur": null,
+                    "Karnatak University,Dharwad": null,
+                    "Karnataka Janapada Vishwavidyalaya,Shiggaon": null,
+                    "Karnataka Sanskrit University,Bangalore": null,
+                    "Karnataka State Law University,Hubli": null,
+                    "Karnataka State Rural Development and Panchayat Raj University,Gadag": null,
+                    "Karnataka State Women's University,Bijapur": null,
+                    "Karnataka Veterinary, Animal and Fisheries Sciences University,Bidar": null,
+                    "Karnavati University,Gandhinagar": null,
+                    "Karpagam Academy of Higher Education,Coimbatore": null,
+                    "Karunya University,Coimbatore": null,
+                    "Kavi Kulguru Kalidas Sanskrit Vishwavidyalaya,Nagpur": null,
+                    "Kazi Nazrul University,Asansol": null,
+                    "Kaziranga University,Jorhat": null,
+                    "Kerala Agricultural University,Thrissur": null,
+                    "Kerala Kalamandalam,Cheruthuruthi": null,
+                    "Kerala University of Fisheries and Ocean Studies,Kochi": null,
+                    "Kerala University of Health Sciences,Thrissur": null,
+                    "Kerala Veterinary and Animal Sciences University,Pookode": null,
+                    "Khallikote University,Berhampur": null,
+                    "Khalsa University,Amritsar": null,
+                    "Khwaja Moinuddin Chishti Urdu, Arabi-Farsi University,Lucknow": null,
+                    "KLE Technological University,Hubli": null,
+                    "KLE University,Belgaum": null,
+                    "Kolhan University,Chaibasa": null,
+                    "Krantiguru Shyamji Krishna Verma Kachchh University,Bhuj": null,
+                    "Krishna Institute of Medical Sciences,Karad": null,
+                    "Krishna University,Machilipatnam": null,
+                    "KSGH Music and Performing Arts University,Mysore": null,
+                    "Kumar Bhaskar Varma Sanskrit and Ancient Studies University,Nalbari": null,
+                    "Kushabhau Thakre Patrakarita Avam Jansanchar University,Raipur": null,
+                    "Lakshmibai National Institute of Physical Education,Gwalior": null,
+                    "Lakulish Yoga University,Ahmedabad": null,
+                    "Lala Lajpat Rai University of Veterinary and Animal Sciences,Hisar": null,
+                    "Lalit Narayan Mithila University,Darbhanga": null,
+                    "Lingaya's University,Faridabad": null,
+                    "LNCT University,Bhopal": null,
+                    "M.J.P. Rohilkhand University,Bareilly": null,
+                    "M.S. Ramaiah University of Applied Sciences,Bangalore": null,
+                    "Madan Mohan Malaviya University of Technology,Gorakhpur": null,
+                    "Madhav University,Pindwara": null,
+                    "Madurai Kamaraj University,Madurai": null,
+                    "Magadh University,Bodh Gaya": null,
+                    "Mahapurusha Srimanta Sankaradeva Viswavidyalaya,Nagaon": null,
+                    "Maharaja Agrasen University,Baddi": null,
+                    "Maharaja Bir Bikram University,Agartala": null,
+                    "Maharaja Chhatrasal Bundelkhand University,Chhatarpur": null,
+                    "Maharaja Ganga Singh University,Bikaner": null,
+                    "Maharaja Krishnakumarsinhji Bhavnagar University,Bhavnagar": null,
+                    "Maharaja Ranjit Singh Punjab Technical University,Bathinda": null,
+                    "Maharaja Surajmal Brij University,Bharatpur": null,
+                    "Maharana Pratap University of Agriculture and Technology,Udaipur": null,
+                    "Maharashtra Animal and Fishery Sciences University,Nagpur": null,
+                    "Maharashtra National Law University, Aurangabad,Aurangabad": null,
+                    "Maharashtra National Law University, Mumbai,Mumbai": null,
+                    "Maharashtra National Law University, Nagpur,Nagpur": null,
+                    "Maharashtra University of Health Sciences,Nashik": null,
+                    "Maharishi Arvind University, Jaipur,Mundiya Purohitan": null,
+                    "Maharishi Dayanand University,Rohtak": null,
+                    "Maharishi Mahesh Yogi Vedic Vishwavidyalaya,Katni": null,
+                    "Maharishi Markandeshwar University, Mullana,Mullana": null,
+                    "Maharishi Markandeshwar University, Sadopur,Ambala": null,
+                    "Maharishi Markandeshwar University, Solan,Solan": null,
+                    "Maharishi University of Management and Technology,Bilaspur": null,
+                    "Maharishi University,Lucknow": null,
+                    "Maharshi Dayanand Saraswati University,Ajmer": null,
+                    "Maharshi Panini Sanskrit Vishwavidyalaya,Ujjain": null,
+                    "Mahatma Gandhi Antarrashtriya Hindi Vishwavidyalaya,Wardha": null,
+                    "Mahatma Gandhi Central University, Motihari,Motihari": null,
+                    "Mahatma Gandhi Chitrakoot Gramoday Vishwavidyalaya,Chitrakoot": null,
+                    "Mahatma Gandhi Kashi Vidyapeeth,Varanasi": null,
+                    "Mahatma Gandhi University of Medical Sciences and Technology,Jaipur": null,
+                    "Mahatma Gandhi University, Meghalaya,Khanapara": null,
+                    "Mahatma Gandhi University, Nalgonda,Nalgonda": null,
+                    "Mahatma Gandhi University,Kottayam": null,
+                    "Mahatma Jyoti Rao Phoole University,Jaipur": null,
+                    "Mahatma Phule Krishi Vidyapeeth,Rahuri": null,
+                    "Makhanlal Chaturvedi Rashtriya Patrakarita Vishwavidyalaya,Bhopal": null,
+                    "Malwanchal University,Indore": null,
+                    "Manav Bharti University,Solan": null,
+                    "Manav Rachna International Institute of Research and Studies,Faridabad": null,
+                    "Manav Rachna University,Faridabad": null,
+                    "Mandsaur University,Mandsaur": null,
+                    "Mangalayatan University,Aligarh": null,
+                    "Manipur Technical University,Imphal": null,
+                    "Manipur University of Culture,Imphal": null,
+                    "Manipur University,Imphal": null,
+                    "Manonmaniam Sundaranar University,Tirunelveli": null,
+                    "Martin Luther Christian University,Shillong": null,
+                    "Marwadi University,Rajkot": null,
+                    "MATS University,Aarang": null,
+                    "Maulana Abul Kalam Azad University of Technology,Kolkata": null,
+                    "Maulana Azad National Urdu University,Hyderabad": null,
+                    "Maulana Azad University, Jodhpur,Jodhpur": null,
+                    "Maulana Mazharul Haque Arabic and Persian University,Patna": null,
+                    "Medi-Caps University,Indore": null,
+                    "Meenakshi Academy of Higher Education and Research,Chennai": null,
+                    "Mewar University,Chittorgarh": null,
+                    "MGM Institute of Health Sciences,Navi Mumbai": null,
+                    "MIT Art Design and Technology University,Pune": null,
+                    "Mizoram University,Aizawl": null,
+                    "Mody University of Science and Technology,Lakshmangarh": null,
+                    "Mohammad Ali Jauhar University,Rampur": null,
+                    "Mohanlal Sukhadia University,Udaipur": null,
+                    "Monad University,Hapur": null,
+                    "Mother Teresa Women's University,Kodaikanal": null,
+                    "Motherhood University,Bhagwanpur": null,
+                    "MVN University,Palwal": null,
+                    "Nagaland University,Kohima": null,
+                    "NALSAR University of Law,Hyderabad": null,
+                    "Nanaji Deshmukh Veterinary Science University,Jabalpur": null,
+                    "Narendra Dev University of Agriculture and Technology,Faizabad": null,
+                    "Narsee Monjee Institute of Management and Higher Studies,Mumbai": null,
+                    "National Dairy Research Institute,Karnal": null,
+                    "National Institute of Food Technology Entrepreneurship and Management,Sonipat": null,
+                    "National Institute of Mental Health and Neuro Sciences,Bangalore": null,
+                    "National Institute of Pharmaceutical Education and Research, Ahmedabad,Ahmedabad": null,
+                    "National Institute of Pharmaceutical Education and Research, Guwahati,Guwahati": null,
+                    "National Institute of Pharmaceutical Education and Research, Hajipur,Hajipur": null,
+                    "National Institute of Pharmaceutical Education and Research, Kolkata,Kolkata": null,
+                    "National Institute of Pharmaceutical Education and Research, Mohali,Mohali": null,
+                    "National Institute of Pharmaceutical Education and Research, Rae Bareli,Rae Bareli": null,
+                    "National Law Institute University,Bhopal": null,
+                    "National Law University and Judicial Academy,Guwahati": null,
+                    "National Law University, Orissa,Cuttack": null,
+                    "National University of Educational Planning and Administration,New Delhi": null,
+                    "National University of Study and Research in Law,Ranchi": null,
+                    "Nava Nalanda Mahavihara,Bargaon": null,
+                    "Navrachana University,Vadodara": null,
+                    "Navsari Agricultural University,Navsari": null,
+                    "Nehru Gram Bharati Vishwavidyalaya,Allahabad": null,
+                    "NIILM University,Kaithal": null,
+                    "NIIT University,Neemrana": null,
+                    "Nilamber-Pitamber University,Medininagar": null,
+                    "NIMS University,Jaipur": null,
+                    "Nirma University of Science and Technology,Ahmedabad": null,
+                    "NITTE University,Mangalore": null,
+                    "Nizam's Institute of Medical Sciences,Hyderabad": null,
+                    "Noida International University,Greater Noida": null,
+                    "North East Frontier Technical University,Aalo": null,
+                    "North Eastern Hill University,Shillong": null,
+                    "North Eastern Regional Institute of Science and Technology,Itanagar": null,
+                    "North Orissa University,Baripada": null,
+                    "O.P. Jindal University,Raigarh": null,
+                    "OPJS University,Churu": null,
+                    "Oriental University,Indore": null,
+                    "Orissa University of Agriculture and Technology,Bhubaneswar": null,
+                    "P P Savani University,Kosamba": null,
+                    "P.K. University,Village Thanara": null,
+                    "Pacific Medical University,Udaipur": null,
+                    "Pacific University, India,Udaipur": null,
+                    "Padmashree Dr. D.Y. Patil Vidyapith,Navi Mumbai": null,
+                    "Palamuru University,Mahabubnagar": null,
+                    "Pandit Deendayal Petroleum University,Gandhinagar": null,
+                    "Pandit Deendayal Upadhyaya Shekhawati University,Sikar": null,
+                    "Pandit Ravishankar Shukla University,Raipur": null,
+                    "Parul University,Waghodia": null,
+                    "Patna University,Patna": null,
+                    "PDM University,Bahadurgarh": null,
+                    "PDPM Indian Institute of Information Technology, Design and Manufacturing,Jabalpur": null,
+                    "PEC University of Technology,Chandigarh": null,
+                    "People's University,Bhopal": null,
+                    "Periyar Maniammai University,Vallam": null,
+                    "Periyar University,Salem": null,
+                    "PES University,Bangalore": null,
+                    "Plastindia International University,Vapi": null,
+                    "Ponnaiyan Ramajayam Institute of Science and Technology,Thanjavur": null,
+                    "Poornima University,Jaipur": null,
+                    "Potti Sreeramulu Telugu University,Hyderabad": null,
+                    "Pragyan International University,Ranchi": null,
+                    "Pratap University,Jaipur": null,
+                    "Pravara Institute of Medical Sciences,Loni": null,
+                    "Presidency University,Bangalore": null,
+                    "Presidency University,Kolkata": null,
+                    "Professor Jayashankar Telangana State Agricultural University,Hyderabad": null,
+                    "Pt. Bhagwat Dayal Sharma University of Health Sciences,Rohtak": null,
+                    "Punjab Agricultural University,Ludhiana": null,
+                    "Punjab Technical University,Kapurthala": null,
+                    "Punjabi University,Patiala": null,
+                    "Quantum University,Roorkee": null,
+                    "Rabindra Bharati University,Kolkata": null,
+                    "Raffles University,Neemrana": null,
+                    "Rai Technology University,Doddaballapura": null,
+                    "Rai University,Dholka": null,
+                    "Raiganj University,Raiganj": null,
+                    "Raj Rishi Bharthari Matsya University,Alwar": null,
+                    "Raja Mansingh Tomar Music and Arts University,Gwalior": null,
+                    "Rajasthan Technical University Kota,Kota": null,
+                    "Rajasthan University of Health Sciences,Jaipur": null,
+                    "Rajasthan University of Veterinary and Animal Sciences,Bikaner": null,
+                    "Rajiv Gandhi National Aviation University,Raebareli": null,
+                    "Rajiv Gandhi National University of Law,Patiala": null,
+                    "Rajiv Gandhi Proudyogiki Vishwavidyalaya,Bhopal": null,
+                    "Rajiv Gandhi University of Health Sciences,Bangalore": null,
+                    "Rajiv Gandhi University of Knowledge Technologies,Hyderabad": null,
+                    "Rajiv Gandhi University,Itanagar": null,
+                    "Rajmata Vijayaraje Scindia Krishi Vishwavidyalaya,Gwalior": null,
+                    "Raksha Shakti University,Ahmedabad": null,
+                    "Rama Devi Women's University,Bhubaneswar": null,
+                    "Rama University,Kanpur": null,
+                    "Ramakrishna Mission Vivekananda University,Belur": null,
+                    "Ranchi University,Ranchi": null,
+                    "Rani Channamma University, Belagavi,Belagavi": null,
+                    "Rani Lakshmi Bai Central Agricultural University,Jhansi": null,
+                    "Ras Bihari Bose Subharti University,Dehradun": null,
+                    "Rashtrasant Tukadoji Maharaj Nagpur University,Nagpur": null,
+                    "Rashtriya Sanskrit Sansthan University,New Delhi": null,
+                    "Rashtriya Sanskrit Vidyapeetha,Tirupati": null,
+                    "Ravenshaw University,Cuttack": null,
+                    "Rayalaseema University,Kurnool": null,
+                    "Rayat-Bahra University,Kharar": null,
+                    "REVA University,Bangalore": null,
+                    "RIMT University,Mandi Gobindgarh": null,
+                    "RK University,Rajkot": null,
+                    "RKDF University,Bhopal": null,
+                    "Sai Nath University,Ranchi": null,
+                    "Sai Tirupati University,Udaipur": null,
+                    "Sam Higginbottom Institute of Agriculture, Technology and Sciences,Allahabad": null,
+                    "Sambalpur University,Burla": null,
+                    "Sampurnanand Sanskrit Vishvavidyalaya,Varanasi": null,
+                    "Sanchi University of Buddhist-Indic Studies,Sanchi": null,
+                    "Sandip University, Sijoul,Sijoul": null,
+                    "Sandip University,Mahiravani": null,
+                    "Sangai International University,Churachandpur": null,
+                    "Sangam University,Bhilwara": null,
+                    "Sanjay Gandhi Post Graduate Institute of Medical Sciences,Lucknow": null,
+                    "Sanjay Ghodawat University,Kolhapur": null,
+                    "Sankalchand Patel University,Visnagar": null,
+                    "Sanskriti University,Mathura": null,
+                    "Sant Baba Bhag Singh University,Jalandhar": null,
+                    "Sant Gadge Baba Amravati University,Amravati": null,
+                    "Sant Longowal Institute of Engineering and Technology,Sangrur": null,
+                    "Santosh University,Ghaziabad": null,
+                    "Sardar Patel University of Police, Security and Criminal Justice,Jodhpur": null,
+                    "Sardar Patel University,Vallabh Vidyanagar": null,
+                    "Sardar Vallabhbhai Patel University of Agriculture and Technology,Meerut": null,
+                    "Sardarkrushinagar Dantiwada Agricultural University,Palanpur": null,
+                    "Sarguja University,Ambikapur": null,
+                    "Sarla Birla University,Ranchi": null,
+                    "Sarvepalli Radhakrishnan University,Bhopal": null,
+                    "Satavahana University,Karimnagar": null,
+                    "Saurashtra University,Rajkot": null,
+                    "Saveetha University,Chennai": null,
+                    "Seacom Skills University,Santiniketan": null,
+                    "Sharda University,Greater Noida": null,
+                    "Sharnbasva University,Gulbarga": null,
+                    "Sher-e-Kashmir University of Agricultural Sciences and Technology of Jammu,Jammu": null,
+                    "Sher-e-Kashmir University of Agricultural Sciences and Technology of Kashmir,Srinagar": null,
+                    "Sher-i-Kashmir Institute of Medical Sciences,Srinagar": null,
+                    "Shiv Nadar University,Dadri": null,
+                    "Shivaji University,Kolhapur": null,
+                    "Shobhit University,Meerut": null,
+                    "Shoolini University of Biotechnology and Management Sciences,Solan": null,
+                    "Shree Guru Gobind Singh Tricentenary University,Gurgaon": null,
+                    "Shree Somnath Sanskrit University,Veraval": null,
+                    "Shreemati Nathibai Damodar Thackersey Women's University,Mumbai": null,
+                    "Shri Govind Guru University,Godhra": null,
+                    "Shri Guru Ram Rai Education Mission,Dehradun": null,
+                    "Shri Guru Ram Rai University,Dehradun": null,
+                    "Shri Jagannath Sanskrit Vishvavidyalaya,Puri": null,
+                    "Shri Jagdishprasad Jhabrmal Tibrewala University,Jhunjhunu": null,
+                    "Shri Lal Bahadur Shastri Rashtriya Sanskrit Vidyapeetha,New Delhi": null,
+                    "Shri Mata Vaishno Devi University,Katra": null,
+                    "Shri Ramswaroop Memorial University,Barabanki": null,
+                    "Shri Vaishnav Vidyapeeth Vishwavidyalaya,Indore": null,
+                    "Shri Venkateshwara University,Gajraula": null,
+                    "Shridhar University,Pilani": null,
+                    "Siddharth University,Kapilvastu": null,
+                    "Sidho Kanho Birsha University,Purulia": null,
+                    "Sido Kanhu Murmu University,Dumka": null,
+                    "Sikkim Manipal University,Gangtok": null,
+                    "Sikkim University,Tadong": null,
+                    "Siksha O Anusandhan University,Bhubaneswar": null,
+                    "Singhania University,Jhunjhunu": null,
+                    "Sir Padampat Singhania University,Udaipur": null,
+                    "South Asian University,New Delhi": null,
+                    "Spicer Adventist University,Pune": null,
+                    "Sree Sankaracharya University of Sanskrit,Kalady": null,
+                    "Sri Balaji Vidyapeeth,Puducherry": null,
+                    "Sri Chandrasekharendra Saraswathi Viswa Mahavidyalaya,Kanchipuram": null,
+                    "Sri Dev Suman Uttarakhand University,Tehri": null,
+                    "Sri Devaraj Urs Academy of Higher Education and Research,Kolar": null,
+                    "Sri Guru Granth Sahib World University,Fatehgarh Sahib": null,
+                    "Sri Guru Ram Das University of Health Sciences,Qila Jiwan Singh": null,
+                    "Sri Konda Laxman Telangana State Horticultural University,Hyderabad": null,
+                    "Sri Padmavati Mahila Visvavidyalayam,Tirupati": null,
+                    "Sri Ramachandra University,Chennai": null,
+                    "Sri Sai University,Palampur": null,
+                    "Sri Sathya Sai Institute of Higher Learning,Anantapur": null,
+                    "Sri Satya Sai University of Technology and Medical Sciences,Sehore": null,
+                    "Sri Siddhartha Academy of Higher Education,Tumkur": null,
+                    "Sri Sri University,Cuttack": null,
+                    "Sri Venkateswara Institute of Medical Sciences,Tirupati": null,
+                    "Sri Venkateswara Vedic University,Tirupati": null,
+                    "Sri Venkateswara Veterinary University,Tirupati": null,
+                    "Srimanta Sankaradeva University of Health Sciences,Guwahati": null,
+                    "Srinivas University,Mangalore": null,
+                    "SRM University Haryana,Sonipat": null,
+                    "SRM University, Sikkim,Gangtok": null,
+                    "St. Joseph University,Dimapur": null,
+                    "St. Peter's University,Chennai": null,
+                    "Starex University,Gurgaon": null,
+                    "State University of Performing and Visual Arts,Rohtak": null,
+                    "Suamandeep Vidyapeeth,Vadodara": null,
+                    "Sunrise University,Alwar": null,
+                    "Suresh Gyan Vihar University,Jaipur": null,
+                    "Swami Keshwanand Rajasthan Agricultural University,Bikaner": null,
+                    "Swami Rama Himalayan University,Dehradun": null,
+                    "Swami Ramanand Teerth Marathwada University,Nanded": null,
+                    "Swami Vivekanand Subharti University,Meerut": null,
+                    "Swami Vivekanand University,Sagar": null,
+                    "Swami Vivekananda Yoga Anusandhana Samsthana,Bangalore": null,
+                    "Swarnim Gujarat Sports University,Gandhinagar": null,
+                    "Swarnim Startup and Innovation University,Gandhinagar": null,
+                    "Symbiosis University of Applied Sciences,Indore": null,
+                    "Tamil Nadu Dr Ambedkar Law University,Chennai": null,
+                    "Tamil Nadu Dr. M.G.R.Medical University,Chennai": null,
+                    "Tamil Nadu Fisheries University,Nagapattinam": null,
+                    "Tamil Nadu Music and Fine Arts University,Chennai": null,
+                    "Tamil Nadu National Law School,Tiruchirappalli": null,
+                    "Tamil Nadu Physical Education and Sports University,Chennai": null,
+                    "Tamil Nadu Teacher Education University,Chennai": null,
+                    "Tamil Nadu Veterinary and Animal Sciences University,Chennai": null,
+                    "Tamil University,Thanjavur": null,
+                    "Tantia University,Sri Ganganagar": null,
+                    "Tata Institute of Fundamental Research,Mumbai": null,
+                    "Tata Institute of Social Sciences,Mumbai": null,
+                    "TeamLease Skills University,Tarsali": null,
+                    "Techno India University,Kolkata": null,
+                    "Teerthanker Mahaveer University,Moradabad": null,
+                    "Telangana University,Nizamabad": null,
+                    "TERI University,New Delhi": null,
+                    "The English and Foreign Languages University,Hyderabad": null,
+                    "The IIS University,Jaipur": null,
+                    "The Indian Law Institute,New Delhi": null,
+                    "The LNM Institute of Information Technology,Jaipur": null,
+                    "The Maharaja Sayajirao University of Baroda,Vadodara": null,
+                    "The National University of Advanced Legal Studies,Kochi": null,
+                    "The Neotia University,Sarisha": null,
+                    "The Northcap University,Gurgaon": null,
+                    "The Sanskrit College and University,Kolkata": null,
+                    "The West Bengal National University of Juridical Sciences,Kolkata": null,
+                    "Thiruvalluvar University,Vellore": null,
+                    "Thunchath Ezhuthachan Malayalam University,Tirur": null,
+                    "Tilak Maharashtra Vidyapeeth,Pune": null,
+                    "Tilka Manjhi Bhagalpur University,Bhagalpur": null,
+                    "TransDisciplinary University,Bangalore": null,
+                    "Tripura University,Agartala": null,
+                    "Tumkur University,Tumkur": null,
+                    "U.P. Pandit Deen Dayal Upadhyaya Pashu Chikitsa Vigyan Vishwavidyalaya Evam Go-Anusandhan": null,
+                    "Sansthan,Mathura": null,
+                    "UKA Tarsadia University,Surat": null,
+                    "University of Agricultural and Horticultural Sciences, Shivamogga,Shimoga": null,
+                    "University of Agricultural Sciences, Dharwad,Dharwad": null,
+                    "University of Agricultural Sciences, Raichur,Raichur": null,
+                    "University of Burdwan,Bardhaman": null,
+                    "University of Engineering and Management, Kolkata,Kolkata": null,
+                    "University of Gour Banga,Malda": null,
+                    "University of Horticultural Sciences, Bagalkot,Bagalkot": null,
+                    "University of Hyderabad,Hyderabad": null,
+                    "University of Jammu,Jammu": null,
+                    "University of Kerala,Thiruvananthapuram": null,
+                    "University of Kota,Kota": null,
+                    "University of Lucknow,Lucknow": null,
+                    "University of North Bengal,Siliguri": null,
+                    "University of Patanjali,Haridwar": null,
+                    "University of Petroleum and Energy Studies,Dehradun": null,
+                    "University of Rajasthan,Jaipur": null,
+                    "University of Science and Technology, Meghalaya,Baridua": null,
+                    "University of Solapur,Solapur": null,
+                    "University of Technology and Management,Shillong": null,
+                    "University of Technology,Jaipur": null,
+                    "Usha Martin University,Ranchi": null,
+                    "Utkal University of Culture,Bhubaneswar": null,
+                    "Utkal University,Bhubaneswar": null,
+                    "Uttar Banga Krishi Viswavidyalaya,Pundibari": null,
+                    "Uttar Pradesh University of Medical Sciences,Saifai": null,
+                    "Uttarakhand Aawasiya Vishwavidyalaya,Almora": null,
+                    "Uttarakhand Ayurved University,Dehradun": null,
+                    "Uttarakhand Technical University,Dehradun": null,
+                    "Uttarakhand University of Horticulture and Forestry,Bharsar": null,
+                    "Uttaranchal Sanskrit University,Haridwar": null,
+                    "Uttaranchal University,Dehradun": null,
+                    "Vasantrao Naik Marathwada Krishi Vidyapeeth,Parbhani": null,
+                    "Veer Bahadur Singh Purvanchal University,Jaunpur": null,
+                    "Veer Kunwar Singh University,Arrah": null,
+                    "Veer Narmad South Gujarat University,Surat": null,
+                    "Veer Surendra Sai University of Technology,Sambalpur": null,
+                    "Vel Tech Dr.RR and Dr.SR Technical University,Chennai": null,
+                    "Vels University,Chennai": null,
+                    "Vidyasagar University,Midnapore": null,
+                    "Vignan University,Guntur": null,
+                    "Vijayanagara Sri Krishnadevaraya University,Bellary": null,
+                    "Vikram University,Ujjain": null,
+                    "Vikrama Simhapuri University,Nellore": null,
+                    "Vinayaka Missions Sikkim University,Gangtok": null,
+                    "Vinayaka Missions University,Salem": null,
+                    "Vinoba Bhave University,Hazaribag": null,
+                    "Vishwakarma University,Pune": null,
+                    "Visvesvaraya National Institute of Technology,Nagpur": null,
+                    "Visvesvaraya Technological University,Belgaum": null,
+                    "VIT Bhopal University,Bhopal": null,
+                    "Vivekananda Global University,Jaipur": null,
+                    "West Bengal State University,Barasat": null,
+                    "West Bengal University of Animal and Fishery Sciences,Kolkata": null,
+                    "West Bengal University of Health Sciences,Kolkata": null,
+                    "West Bengal University of Teachers' Training, Education Planning and Administration,Kolkata": null,
+                    "William Carey University, India,Shillong": null,
+                    "William Carey University, Meghalaya,Shillong": null,
+                    "Xavier University Bhubaneswar,Harirajpur": null,
+                    "YBN University,Ranchi": null,
+                    "Yenepoya University,Mangalore": null,
+                    "YMCA University of Science and Technology,Faridabad": null,
+                    "Yogi Vemana University,Kadapa": null
+                },
+            });
+            $('select').formSelect();
+
+
+            $('#recommendButton').on('click', function () {
+                //gather values and make json
+                var requestJSON = {
+                    "gre": $('#gre').val(),
+                    "toefl": $('#toefl').val(),
+                    "gmat": $('#gmat').val(),
+                    // "field": $('#field').val(),
+                    "age": $('#age').val(),
+                    "nationality": $('#nationality').val(),
+                    "state": $('#state').val(),
+                    "ethnicity": $('#ethnicity').val(),
+                    "degree": $('#degree').val(),
+                    "gpa": $('#gpa').val(),
+                    // "paper": $('#research_paper').val(),
+                    "total_exp": $('#total_exp').val(),
+                    "previous_school": $('#undergrad_school').val(),
+                    "previous_dept": $('#undergrad_dept').val(),
+                    "target_dept": $('#target_dept').val(),
+                    "budget": $('#budget').val()
+
+                }
+                // requestJSON = {
+
+                //     "age": "40",
+                //     "nationality": "India",
+                //     "state": "InState",
+                //     "ethnicity": "Caucasian",
+                //     "degree": "Master",
+                //     "gpa": "3.6",
+                //     "field": "6",
+                //     "gmat": "700",
+                //     "gre": "330",
+                //     "toefl": "100",
+                //     "total_exp": "3",
+                //     "budget": "35000",
+                //     "target_dept": "Computer Science & Information"
+                // }
+                console.log(requestJSON);
+
+                $.ajax({
+                    beforeSend: function () {
+                        $('#miscelleanous').removeClass('hide');
+                        $('#resultPreloader').removeClass('hide');
+                        $('#resultFailed').addClass('hide');
+                        $('#results').removeClass('hide');
+                        $('#form').removeClass('s12', 500, 'easeOutBounce').addClass('s5', 500, 'easeOutBounce')
+
+                        $('#dream_school_card').addClass('hide');
+                        $('#reach_school_card').addClass('hide');
+                        $('#safe_school_card').addClass('hide');
+                    },
+                    url: 'http://35.231.181.145:8084/reco/predict/',
+                    type: 'POST',
+                    data: JSON.stringify(requestJSON),
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function (response) {
+                        
+
+                        apiResponse = response;
+                        if (typeof response == 'string') {
+                            response = JSON.parse(response)
+                        }
+
+                        console.log(response['data']['Dream']);  
+                         
+
+
+                        // if (response && response.hasOwnProperty('status_code') == 200) {
+
+                            console.log("hello");
+                            $('#miscelleanous').addClass('hide');
+                            $('#resultFailed').addClass('hide');
+                            $('#resultPreloader').addClass('hide');
+
+
+                            $('#results').removeClass('hide');
+                            $('#form').removeClass('s12', 500, 'easeOutBounce').addClass('s5', 400, 'easeOutBounce')
+
+                            // Create layout for Dream colleges
+                            $('#dream_school_card').removeClass('hide')
+
+
+                            var ul_d = $('ul#dream_schools')
+                            ul_d.empty();
+                            for (var i = 0; i < response['data']['Dream'].length; i++) {
+                                ul_d.append('<li class="collection-item">'+'<span class="program-data">' + response['data']['Dream'][i]['university']+"</br> "+'</span>'+response['data']['Dream'][i]['program'] + '</li>')
+                                // console.log('<li class="collection-item">' + response['data']['Dream'][i] + '</li>')
+                            }
+
+                            // Create layout for Reach colleges
+                            $('#reach_school_card').removeClass('hide')
+                            var ul_r = $('ul#reach_schools')
+                            ul_r.empty();
+                            for (var i = 0; i < response['data']['Reach'].length; i++) {
+                                ul_r.append('<li class="collection-item">' +'<span class="program-data">'+response['data']['Reach'][i]['university']+"</br> "+'</span>'+response['data']['Reach'][i]['program'] + '</li>')
+                            }
+
+
+                            // Create layout for Safe colleges
+                            $('#safe_school_card').removeClass('hide')
+                            var ul_s = $('ul#safe_schools')
+                            ul_s.empty();
+                            for (var i = 0; i < response['data']['Safe'].length; i++) {
+                                ul_s.append('<li class="collection-item">'+'<span class="program-data">' + response['data']['Safe'][i]['university']+"</br> "+'</span>'+response['data']['Safe'][i]['program'] + '</li>')
+                            }
+                        
+
+
+                    },
+                    failure: function (err) {
+                        console.error(err);
+                        $('#miscelleanous').removeClass('hide');
+                        $('#resultFailed').removeClass('hide');
+                    }
+                });
+
+            })
+        });
+
+    </script>
+</body>
+
+</html>

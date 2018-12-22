@@ -1,0 +1,11 @@
+Flask==0.12
+Flask-Cors==3.0.6
+gunicorn==19.9.0
+numpy==1.14.5
+pandas==0.23.3
+scipy==1.1.0
+opencv-python==3.4.4.19
+py-agender==0.0.8
+sklearn
+scikit-image==0.14.1
+imutils==0.5.2
