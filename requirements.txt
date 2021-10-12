@@ -4,7 +4,7 @@ gunicorn==19.9.0
 numpy==1.14.5
 pandas==0.23.3
 scipy==1.1.0
-opencv-python==3.4.4.19
+opencv-python==3.4.7.28
 py-agender==0.0.8
 sklearn
 scikit-image==0.14.1
